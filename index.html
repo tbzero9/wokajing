@@ -250,11 +250,21 @@
     </style>
 </head>
 <body>
-    <!-- MTR 线路图嵌入模块 -->
-<div id="mtr-map-container" style="margin-top: 2rem; text-align: center; background: rgba(0,0,0,0.3); border-radius: 1.5rem; padding: 1rem;">
-    <div id="mtr-loading" style="padding: 2rem; color: #ffd20c;">🚇 正在加载线路图...</div>
+<!-- MTR 线路图嵌入模块（带标题和爱发电链接） -->
+<div id="mtr-map-container" style="margin-top: 2rem; background: rgba(0,0,0,0.3); border-radius: 1.5rem; padding: 1rem;">
+    <!-- 标题栏 -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
+        <div style="font-size: 1.3rem; font-weight: 700; color: #ffd20c; display: flex; align-items: center; gap: 0.5rem;">
+            🚇 MTR 线路图
+        </div>
+        <a href="https://ifdian.net/a/wokajing_yyn" target="_blank" style="background: #f43e5c; color: white; padding: 0.4rem 1rem; border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; display: inline-flex; align-items: center; gap: 6px;">
+            ❤️ 支持我们（爱发电）
+        </a>
+    </div>
+
+    <div id="mtr-loading" style="padding: 2rem; text-align: center; color: #ffd20c;">🚇 正在加载线路图...</div>
     <iframe id="mtr-iframe" style="width: 100%; height: 500px; border: none; border-radius: 1rem; display: none;"></iframe>
-    <div id="mtr-fallback" style="padding: 2rem; color: #ffa500; display: none;">⚠️ 线路图显示失败！请打开客户端以查看线路图</div>
+    <div id="mtr-fallback" style="padding: 2rem; text-align: center; color: #ffa500; display: none;">⚠️ 线路图显示失败！请打开客户端以查看线路图</div>
 </div>
 
 <script>
@@ -264,21 +274,17 @@
         const fallback = document.getElementById('mtr-fallback');
         const url = 'http://localhost:1025/';
 
-        // 尝试 fetch 检测服务是否可达
         fetch(url, { mode: 'no-cors', cache: 'no-store' })
             .then(() => {
-                // 只要请求不报错（即使 no-cors 也会成功）就认为可访问
                 loading.style.display = 'none';
                 iframe.style.display = 'block';
                 iframe.src = url;
             })
             .catch(() => {
-                // 请求失败，显示备用提示
                 loading.style.display = 'none';
                 fallback.style.display = 'block';
             });
 
-        // 额外添加超时保护：如果 5 秒后 iframe 仍未加载，也降级（针对 fetch 成功但实际加载卡住的情况）
         setTimeout(() => {
             if (loading.style.display !== 'none' && iframe.style.display !== 'block' && fallback.style.display !== 'block') {
                 loading.style.display = 'none';
