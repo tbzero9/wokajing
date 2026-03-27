@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>TBZ 服务器官网 | 我的世界服务器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TBZ09 服务器官网 | 我的世界服务器</title>
     <style>
         * {
             margin: 0;
@@ -12,31 +12,29 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0a0c10 0%, #1a1e24 100%);
-            font-family: 'Segoe UI', 'Poppins', 'Inter', system-ui, -apple-system, 'Roboto', sans-serif;
-            color: #eef2ff;
-            line-height: 1.5;
+            background: linear-gradient(135deg, #0c0e14 0%, #1a1e2a 100%);
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            color: #f0f3fa;
             padding: 2rem 1.5rem;
+            line-height: 1.5;
         }
 
-        /* 主容器 */
         .container {
             max-width: 1300px;
             margin: 0 auto;
         }
 
-        /* 顶部品牌区 */
+        /* 头部区域 */
         .hero {
             text-align: center;
             margin-bottom: 3rem;
-            animation: fadeInUp 0.8s ease-out;
+            animation: fadeIn 0.6s ease-out;
         }
 
         .logo-wrapper {
-            display: inline-block;
-            width: 140px;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            width: 130px;
+            margin: 0 auto 1rem;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
             transition: transform 0.2s;
         }
         .logo-wrapper:hover {
@@ -49,217 +47,171 @@
         }
 
         .server-name {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffed06, #ff8241);
+            background: linear-gradient(135deg, #ffd20c, #ff6834);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
         }
 
-        .tagline {
-            font-size: 1rem;
-            color: #9ca3af;
-            border-top: 1px solid rgba(255,130,65,0.3);
+        .ip-box {
+            background: rgba(0,0,0,0.5);
             display: inline-block;
-            padding-top: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
+            border: 1px solid rgba(255,104,52,0.5);
+            backdrop-filter: blur(4px);
+        }
+        .ip-box span {
+            color: #ffd20c;
+            font-weight: bold;
         }
 
-        /* 网格布局 */
+        /* 两列布局 */
         .dashboard {
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
-        /* 左侧主内容 */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+        /* 卡片通用样式 */
+        .card {
+            background: rgba(18, 22, 32, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(255,104,52,0.3);
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.4);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .card:hover {
+            border-color: #ff6834;
         }
 
-        /* 服务器状态卡牌 */
-        .status-card {
-            background: rgba(20, 24, 32, 0.8);
-            backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            padding: 1.5rem 2rem;
-            border: 1px solid rgba(255,130,65,0.4);
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
-            transition: all 0.2s;
-        }
-
-        .status-header {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        .status-header h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-left: 5px solid #ffd20c;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        .online-badge {
-            background: #10b981;
-            font-size: 0.8rem;
-            padding: 0.2rem 0.8rem;
-            border-radius: 40px;
-            font-weight: 500;
-        }
-        .ip-box {
-            background: #00000055;
-            padding: 0.4rem 1rem;
-            border-radius: 60px;
-            font-family: monospace;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            border: 1px solid #ff8241;
-        }
 
-        .stats {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin: 1.5rem 0 1rem;
-        }
-        .stat-item {
-            background: rgba(0,0,0,0.4);
-            border-radius: 1.5rem;
-            padding: 0.8rem 1.4rem;
-            min-width: 120px;
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #ffed06;
-            line-height: 1;
-        }
-        .stat-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-
-        /* 新闻列表 */
-        .news-section {
-            background: rgba(12, 15, 20, 0.7);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid #2a2e3a;
-        }
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            border-left: 5px solid #ff8241;
-            padding-left: 1rem;
-            margin-bottom: 1.2rem;
-        }
-        .news-item {
-            padding: 1rem 0;
-            border-bottom: 1px solid #2a2e3a;
-            transition: 0.1s;
-        }
-        .news-item:last-child {
-            border-bottom: none;
-        }
-        .news-date {
-            font-size: 0.7rem;
-            color: #ff8241;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        .news-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0.3rem 0 0.2rem;
-        }
-        .news-desc {
-            font-size: 0.9rem;
-            color: #b9c2d4;
-        }
-
-        /* 右侧面板 */
-        .sidebar {
+        /* 排行榜柱状图样式 */
+        .rank-list {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-        }
-
-        .rank-card, .social-card {
-            background: rgba(12, 15, 20, 0.8);
-            backdrop-filter: blur(4px);
-            border-radius: 1.8rem;
-            padding: 1.5rem;
-            border: 1px solid #2a2e3a;
-        }
-
-        .rank-list {
-            margin-top: 1rem;
+            gap: 1.2rem;
         }
         .rank-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0.7rem 0;
-            border-bottom: 1px dashed #2a2e3a;
-            font-weight: 500;
+            gap: 0.8rem;
         }
         .rank-number {
             width: 32px;
             height: 32px;
-            background: #ff8241;
-            border-radius: 60px;
+            background: #ff6834;
+            border-radius: 30px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            margin-right: 12px;
             color: #0a0c10;
+            flex-shrink: 0;
         }
         .rank-name {
-            flex: 1;
-        }
-        .rank-value {
-            color: #ffed06;
-            font-weight: 700;
-        }
-
-        .social-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.2rem;
-            flex-wrap: wrap;
-        }
-        .social-btn {
-            flex: 1;
-            text-align: center;
-            background: #1f2937;
-            padding: 0.8rem 0;
-            border-radius: 2rem;
+            width: 100px;
             font-weight: 600;
-            text-decoration: none;
-            color: white;
-            transition: 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .bar-container {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            height: 28px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bar-fill {
+            background: linear-gradient(90deg, #ffd20c, #ff6834);
+            width: 0%;
+            height: 100%;
+            border-radius: 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: #0a0c10;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: width 0.5s ease;
         }
-        .social-btn.bilibili:hover {
+        .rank-value {
+            min-width: 60px;
+            text-align: right;
+            font-weight: 700;
+            color: #ffd20c;
+        }
+
+        /* 新闻列表 */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .news-item {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .news-date {
+            font-size: 0.75rem;
+            color: #ff6834;
+            letter-spacing: 1px;
+        }
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0.3rem 0;
+        }
+        .news-desc {
+            font-size: 0.9rem;
+            color: #cbd5e6;
+            line-height: 1.4;
+        }
+
+        /* B站按钮区域 */
+        .banner {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .bilibili-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             background: #00a1d6;
-            transform: translateY(-2px);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
         }
-        .social-btn.weibo:hover {
-            background: #e6162d;
+        .bilibili-btn:hover {
+            background: #0082b3;
             transform: translateY(-2px);
         }
 
@@ -268,262 +220,191 @@
             text-align: center;
             margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 1px solid #2a2e3a;
+            border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 0.8rem;
-            color: #6b7280;
+            color: #7f8c9a;
         }
 
-        /* 响应式 */
         @media (max-width: 800px) {
             .dashboard {
                 grid-template-columns: 1fr;
             }
             .server-name {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .logo-wrapper {
-                width: 100px;
+                width: 90px;
             }
             body {
                 padding: 1rem;
             }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .rank-name {
+                width: 70px;
             }
         }
 
-        /* 简单的装饰光效 */
-        .glow {
-            position: relative;
-        }
-        .glow::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(circle at 30% 20%, rgba(255,130,65,0.15), transparent 70%);
-            pointer-events: none;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- 头部 LOGO 区 -->
+    <!-- 头部 LOGO + 服务器信息 -->
     <div class="hero">
         <div class="logo-wrapper">
-            <!-- 这里放您的 LOGO SVG 代码 -->
-            <!-- 请将您提供的完整 SVG 代码粘贴到此处（替换下面这行占位） -->
-            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="300mm"
-   height="300mm"
-   viewBox="0 0 300 300"
-   version="1.1"
-   id="svg1"
-   xml:space="preserve"
-   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
-   sodipodi:docname="TBZ.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     showgrid="true"
-     inkscape:zoom="1.624025"
-     inkscape:cx="429.48847"
-     inkscape:cy="574.80643"
-     inkscape:window-width="3840"
-     inkscape:window-height="2054"
-     inkscape:window-x="-11"
-     inkscape:window-y="-11"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"><inkscape:grid
-       id="grid1"
-       units="mm"
-       originx="0"
-       originy="0"
-       spacingx="9.9999999"
-       spacingy="2.5"
-       empcolor="#0099e5"
-       empopacity="0.30196078"
-       color="#0099e5"
-       opacity="0.14901961"
-       empspacing="5"
-       dotted="false"
-       gridanglex="30"
-       gridanglez="30"
-       visible="true" /></sodipodi:namedview><defs
-     id="defs1" /><g
-     inkscape:label="图层 1"
-     inkscape:groupmode="layer"
-     id="layer1"><image
-       width="200"
-       height="195"
-       preserveAspectRatio="none"
-       xlink:href="data:image/jpeg;base64,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&#10;OMqsV+It7KssLs2c4rVX/wCD5827vjicPtKrCKlo+8p+l/6elrnf4+inWwuW/XQv8zXY/EYfJpWh&#10;4nzqt/cZwtPxRZHfTFVdHmIz8LkdWrTl367RLFUozlapHiTjjab/AKkTjUN5a8tXmLJ7x1ktMxzf&#10;q8r0cdTsbxNF/wBSPiJV6HvI+JxSpvRiUtFIjT3pxXNSRt+r8X/C7f8AaKPvI+I/tFD3kfE4p50Y&#10;nukRe9OJXKRX9RH4XbPtND3sfEi8XQ97HxOHz3rxK5SKZb24n+4tPCVup3X7XQ97HxJLF0Pex8Tg&#10;3nbif7iS3txP9xP6TO63eftdCz9LDxKKmNpe8j4nDlvbiO6RNb013xzEXw+E1Oy1sXScH6SJqMVV&#10;pNu00c1W8lZrmJ7drS11K/q8a46nu81PrPWRfKpTyLtI56tr1W76lj2xVy8yP1m+Ol7aMqed9pGQ&#10;p07eujnnlarfmT8s1fiP1200vf56ftITqU/bXieBe2qvxK57ZqrvJ/XRdT37qU/biLraftrxOdy2&#10;3W+JW9t1fiXnjM7qdIVan7aH11P20c2W26vxDy5V+Jb9ZnlqdJ62l7aBVad1214nN1tyq+8flur8&#10;SL4zO63ZdmYijFa1I+JtYYuh72PicG85q9PhmJrezE2/mIvh9Z3W7pLF0Pex8SH2uhf72PicMe9u&#10;I/uI+dmI/uI/RqPx13lYuhb72PiJ4uh72PicKW9uIt/MLzsxP9wngrTW7ssVQv8Aex8Sx4mjb7yP&#10;icIhvZib/wAxkx3qxDXCRN8Ti+OnrtMsRR95HxK/tFG/3kfE475z4h+0LzlxHdIpfFdM0Xjsv2ii&#10;/wCpHxJKvR95HxONLebEf3D85sR/cU/UZZ6+OzPEUPeR8TMwOLoRf3sfE4XPefEL2iEd7MTD2i+P&#10;iuTZg+i/KGH99HxE9pUF/Vj4nzpPfTFL2vEjDfXEvjmNv1OuLLDj6g2fUp4i2WadzKq08r0OZdGm&#10;2quOVLNfWx1SjHPa4/R7/jg2Tl611RyT0TLaMp9zNnHCwb1aMqjhKduJ06vD5XFsyYuGlLTRm0oR&#10;vHQKeHguaMhQUYOx7XjafVx55IqKLImvq1JKqkuBm0W3HU9H14x6tQ0JDRCUkAIAAAAAAAAAAAEA&#10;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&#10;AAAAAAAP/9k=&#10;"
-       id="image1"
-       x="50"
-       y="50"
-       style="display:none" /><path
-       style="opacity:1;fill:#ff8241;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 95.000001,132.5 -10,20.66802 -3e-6,36.83198 C 84.999996,215 115,215 115,215 v -20 h -10 v -45 h 90 v 45 h -10 v 20 c 0,0 30,0 30,-25 v -37.5 l -10,-20 -40,0 -1.25,2.5 h -30 l -1.25,-2.5 z"
-       id="path3"
-       sodipodi:nodetypes="ccsccccccccsccccccc" /><path
-       style="display:inline;opacity:1;fill:#ffed06;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 215,80 -17.5,10e-7 5,10 V 102.5 L 191.3768,110 H 202.5 v 15 H 160 l -1.25,2.5 h -2.5 L 162.5,115 v -2.5 l -3.75,-7.5 v -2.5 l 3.75,-7.499999 v -2.5 l -6.25,-12.5 L 150,80 l -11.25,10e-7 -1.25,2.5 V 125 l 1.25,2.5 -2.5,0 L 135,125 V 102.5 H 125 V 125 H 110 V 102.5 H 97.500001 V 90.000001 l 4.999999,-10 L 80,80 l 10e-7,50 H 133.75 l 1.25,2.5 h 27.5 l 1.25,-2.5 H 215 Z"
-       id="path1"
-       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccc" /><path
-       style="opacity:1;fill:#ff8241;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 120,195 h 10 v -40 l 10,0 10,19.87453 V 190 c 0,25 -30,25 -30,25 z"
-       id="path4"
-       sodipodi:nodetypes="cccccscc" /><path
-       style="opacity:1;fill:#ff8241;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 150,155 15,30 h 25 v -20 h -15 l -7.5,-15 h -20 z"
-       id="path5"
-       sodipodi:nodetypes="cccccccc" /><path
-       style="opacity:1;fill:#ff8241;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="M 100,89.999999 V 100 h 12.5 l 0,22.5 h 10 l 0.052,-22.5 H 135 V 89.999999 Z"
-       id="path6"
-       sodipodi:nodetypes="ccccccccc" /><path
-       style="opacity:1;fill:#ff8241;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="M 165,89.999999 V 100 h 20 l -20,12.5 v 10 h 35 v -10 H 182.5 L 200,100 V 89.999999 Z"
-       id="path7"
-       sodipodi:nodetypes="ccccccccccc" /><path
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 145,100 h 7.5 l 2.5,-4.999999 0,-2.5 -2.5,-5 H 145 Z"
-       id="path8"
-       sodipodi:nodetypes="ccccccc" /><path
-       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 145,120 h 7.5 l 2.5,-5 v -2.5 l -2.5,-5 H 145 Z"
-       id="path8-7"
-       sodipodi:nodetypes="ccccccc" /><path
-       style="opacity:1;fill:#ffed06;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 165,102.5 12.13121,0 L 165,110 163.75,107.5 V 105 Z"
-       id="path9"
-       sodipodi:nodetypes="cccccc" /><path
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:square;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="m 136.25,127.5 1.25,2.5 c 0,0 20,0 20,0 l 1.25,-2.5 z"
-       id="path10" /></g></svg>
-
-            <svg width="100%" height="100%" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <!-- 您的原始 SVG 内容直接放这里即可，为保持简洁此处仅展示结构，实际使用时粘贴完整代码 -->
-                <!-- 示例路径（您复制您自己的完整SVG替换这一块） -->
-                <rect width="300" height="300" fill="none" />
-                <path fill="#ff8241" d="m 95,132.5 -10,20.66802 -3e-6,36.83198 C 84.999996,215 115,215 115,215 v -20 h -10 v -45 h 90 v 45 h -10 v 20 c 0,0 30,0 30,-25 v -37.5 l -10,-20 -40,0 -1.25,2.5 h -30 l -1.25,-2.5 z" />
-                <path fill="#ffed06" d="m 215,80 -17.5,10e-7 5,10 V 102.5 L 191.3768,110 H 202.5 v 15 H 160 l -1.25,2.5 h -2.5 L 162.5,115 v -2.5 l -3.75,-7.5 v -2.5 l 3.75,-7.499999 v -2.5 l -6.25,-12.5 L 150,80 l -11.25,10e-7 -1.25,2.5 V 125 l 1.25,2.5 -2.5,0 L 135,125 V 102.5 H 125 V 125 H 110 V 102.5 H 97.500001 V 90.000001 l 4.999999,-10 L 80,80 l 10e-7,50 H 133.75 l 1.25,2.5 h 27.5 l 1.25,-2.5 H 215 Z" />
-                <path fill="#ff8241" d="m 120,195 h 10 v -40 l 10,0 10,19.87453 V 190 c 0,25 -30,25 -30,25 z" />
-                <path fill="#ff8241" d="m 150,155 15,30 h 25 v -20 h -15 l -7.5,-15 h -20 z" />
-                <path fill="#ff8241" d="M 100,89.999999 V 100 h 12.5 l 0,22.5 h 10 l 0.052,-22.5 H 135 V 89.999999 Z" />
-                <path fill="#ff8241" d="M 165,89.999999 V 100 h 20 l -20,12.5 v 10 h 35 v -10 H 182.5 L 200,100 V 89.999999 Z" />
-                <path fill="#ffffff" d="m 145,100 h 7.5 l 2.5,-4.999999 0,-2.5 -2.5,-5 H 145 Z" />
-                <path fill="#ffffff" d="m 145,120 h 7.5 l 2.5,-5 v -2.5 l -2.5,-5 H 145 Z" />
-                <path fill="#ffed06" d="m 165,102.5 12.13121,0 L 165,110 163.75,107.5 V 105 Z" />
-                <path fill="#ffffff" d="m 136.25,127.5 1.25,2.5 c 0,0 20,0 20,0 l 1.25,-2.5 z" />
+            <!-- 用户提供的 TBZ LOGO SVG (更新版) -->
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ff6834" d="m 95,132.5 -10,20.66802 -3e-6,36.83198 C 84.999996,215 115,215 115,215 v -20 h -10 v -45 h 90 v 45 h -10 v 20 c 0,0 30,0 30,-25 v -37.5 l -10,-20 -40,0 -1.25,2.5 h -30 l -1.25,-2.5 z" />
+                <path fill="#ffd20c" d="M 138.75019 79.999768 L 137.50013 82.499874 L 137.50013 122.50002 L 138.75019 125.00012 L 157.49995 125.00012 L 162.50016 115.00022 L 162.50016 112.50011 L 158.75 104.99979 L 158.75 102.5002 L 162.50016 94.999886 L 162.50016 92.49978 L 156.24989 79.999768 L 150.00015 79.999768 L 138.75019 79.999768 z M 144.99993 87.500085 L 152.50025 87.500085 L 154.99984 92.49978 L 154.99984 94.999886 L 152.50025 100.0001 L 144.99993 100.0001 L 144.99993 87.500085 z M 144.99993 107.4999 L 152.50025 107.4999 L 154.99984 112.50011 L 154.99984 115.00022 L 152.50025 119.99991 L 144.99993 119.99991 L 144.99993 107.4999 z " />
+                <path fill="#ffd20c" d="M 79.999768 79.999768 L 79.999768 129.99982 L 133.74998 129.99982 L 135.00003 132.49992 L 162.50016 132.49992 L 163.75021 129.99982 L 214.9998 129.99982 L 214.9998 79.999768 L 197.50009 79.999768 L 202.49978 90.000191 L 202.49978 102.5002 L 191.37695 110 L 202.49978 110 L 202.49978 125.00012 L 160.00005 125.00012 L 158.75 127.50023 L 156.24989 127.50023 L 138.75019 127.50023 L 136.25008 127.50023 L 135.00003 125.00012 L 135.00003 102.5002 L 125.00012 102.5002 L 125.00012 125.00012 L 110 125.00012 L 110 102.5002 L 97.499992 102.5002 L 97.499992 90.000191 L 102.5002 79.999768 L 79.999768 79.999768 z " />
+                <path fill="#ff6834" d="m 120,195 h 10 v -40 h 10 l 10,20 0,15 c 0,25 -30,25 -30,25 z" />
+                <path fill="#ff6834" d="m 150,155 15,30 h 25 v -20 h -15 l -7.5,-15 h -20 z" />
+                <path fill="#ff6834" d="M 100,89.999999 V 100 h 12.5 l 0,22.5 h 10 l 0.052,-22.5 H 135 V 89.999999 Z" />
+                <path fill="#ff6834" d="M 165,89.999999 V 100 h 20 l -20,12.5 v 10 h 35 v -10 H 182.5 L 200,100 V 89.999999 Z" />
+                <path fill="#ffd20c" d="m 165,102.5 12.13121,0 L 165,110 163.75,107.5 V 105 Z" />
             </svg>
         </div>
         <h1 class="server-name">TBZ 创世之城</h1>
-        <div class="tagline">✦ 生存 | 建筑 | 社区 ✦</div>
+        <div class="ip-box">
+            🎮 服务器地址：<span>play.simpfun.cn:35667</span>
+        </div>
     </div>
 
-    <!-- 核心信息面板 -->
+    <!-- 主体内容：左右布局 -->
     <div class="dashboard">
-        <!-- 左侧主要区域 -->
-        <div class="main-content">
-            <div class="status-card">
-                <div class="status-header">
-                    <h2>📡 服务器状态 <span class="online-badge">● 在线</span></h2>
-                    <div class="ip-box">play.tbzserver.com</div>
-                </div>
-                <div class="stats">
-                    <div class="stat-item"><div class="stat-number">24</div><div class="stat-label">当前在线</div></div>
-                    <div class="stat-item"><div class="stat-number">128</div><div class="stat-label">历史最高</div></div>
-                    <div class="stat-item"><div class="stat-number">1.20.4</div><div class="stat-label">游戏版本</div></div>
-                </div>
-                <div style="font-size:0.75rem; opacity:0.6;">✨ 正版验证 | 公益服务器 | 周目守护</div>
+        <!-- 左侧：柱状图贡献值排行榜 -->
+        <div class="card">
+            <div class="card-title">
+                📊 本周贡献值排行
             </div>
-
-            <!-- 新闻发布栏 -->
-            <div class="news-section">
-                <div class="section-title">📢 最新公告</div>
-                <div class="news-item">
-                    <div class="news-date">2026.03.27</div>
-                    <div class="news-title">⚡ 春日建造大赛开启！</div>
-                    <div class="news-desc">即日起至4月10日，参与主题建筑可赢限定称号+钻石奖励，详情群内查看。</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-date">2026.03.20</div>
-                    <div class="news-title">🛠️ 服务器维护升级完成</div>
-                    <div class="news-desc">新增地皮世界，优化红石频率，欢迎大家回归。</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-date">2026.03.10</div>
-                    <div class="news-title">🎉 新周目「赤色黎明」正式开放</div>
-                    <div class="news-desc">全新地形，更多趣味插件，冒险者集结！</div>
-                </div>
+            <div id="rankContainer" class="rank-list">
+                <!-- 动态生成排行榜柱状图 -->
+            </div>
+            <div style="margin-top: 1rem; font-size:0.75rem; text-align:center; opacity:0.6;">
+                ✨ 数据每日手动更新 | 感谢支持
             </div>
         </div>
 
-        <!-- 右侧边栏 -->
-        <div class="sidebar">
-            <!-- 充值排行榜 -->
-            <div class="rank-card">
-                <div class="section-title" style="border-left-color:#ffed06;">💰 本周充值榜</div>
-                <div class="rank-list">
-                    <div class="rank-item"><span><span class="rank-number">1</span><span class="rank-name">剑神_无忌</span></span><span class="rank-value">528 元</span></div>
-                    <div class="rank-item"><span><span class="rank-number">2</span><span class="rank-name">Craft_兔子</span></span><span class="rank-value">300 元</span></div>
-                    <div class="rank-item"><span><span class="rank-number">3</span><span class="rank-name">星空漫游者</span></span><span class="rank-value">188 元</span></div>
-                    <div class="rank-item"><span><span class="rank-number">4</span><span class="rank-name">小橙子OvO</span></span><span class="rank-value">99 元</span></div>
-                    <div class="rank-item"><span><span class="rank-number">5</span><span class="rank-name">TBZ_老K</span></span><span class="rank-value">60 元</span></div>
-                </div>
-                <div style="margin-top:12px; font-size:0.7rem; text-align:center; opacity:0.5;">数据每日手动更新，感谢支持</div>
+        <!-- 右侧：新闻发布页 -->
+        <div class="card">
+            <div class="card-title">
+                📢 最新公告
             </div>
-
-            <!-- 社交链接按钮 -->
-            <div class="social-card">
-                <div class="section-title" style="border-left-color:#ffed06;">📱 关注我们</div>
-                <div class="social-buttons">
-                    <a href="https://space.bilibili.com/你的UID" target="_blank" class="social-btn bilibili">🎬 Bilibili</a>
-                    <a href="https://weibo.com/你的微博ID" target="_blank" class="social-btn weibo">📱 微博</a>
-                </div>
-                <div style="margin-top: 1rem; background: #1f1f2e; border-radius: 2rem; padding: 0.6rem; text-align: center; font-size:0.8rem;">
-                    🎮 QQ群: 123456789
-                </div>
+            <div id="newsContainer" class="news-list">
+                <!-- 动态生成新闻列表 -->
             </div>
         </div>
     </div>
 
-    <!-- 未来扩展：交互地铁线路图占位 (可在此处加入leaflet等) -->
-    <!-- 如果后续想做地铁线路图，可以加一个模块放在dashboard下方 -->
-    <div style="margin-top: 1rem; background: rgba(0,0,0,0.3); border-radius: 1.5rem; padding: 1.5rem; text-align: center;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 0.6rem;">
-            <span>🚇 交互式线路图 (规划中)</span>
-            <span style="font-size: 0.8rem; background: #ff824133; padding: 0.2rem 0.8rem; border-radius: 30px;">即将上线</span>
-        </div>
-        <!-- 未来可以直接替换为地图组件，此处保留位置 -->
+    <!-- B站超链接按钮 -->
+    <div class="banner">
+        <a href="https://space.bilibili.com/3546939914193630?spm_id_from=333.788.0.0" target="_blank" class="bilibili-btn">
+            🎬 访问我们的B站主页
+        </a>
     </div>
 
     <div class="footer">
-        © 2026 TBZ 服务器 | 热爱不息，方块不止 | 官网 v2.0
+        © 2026 TBZ 服务器 | 热爱不息，方块不止
     </div>
 </div>
+
+<script>
+    // ======================== 数据配置区域 ========================
+    // 修改这里的数据即可更新排行榜和新闻内容
+    
+    // 排行榜数据 (前五名) - 格式: { name: "玩家名", value: 贡献值 }
+    const rankData = [
+        { name: "cnmself", value: 15 },
+        { name: "MCfanfan11", value: 15 },
+        { name: "-", value: 0 },
+        { name: "-", value: 0 },
+        { name: "-", value: 0 }
+    ];
+    
+    // 新闻数据 (按时间倒序，最新在上)
+    const newsData = [
+        {
+            date: "2026.03.27",
+            title: "⚡官网已成立",
+            desc: "感谢TBzero9提供灵感"
+        },
+        {
+            date: "2026.03.22",
+            title: "🎉服务器独立日 ",
+            desc: "从轻蓝附属子服务器正式蜕变为独立运营的服务器"
+        },
+        {
+            date: "2026.03.14",
+            title: "🎉服务器正式开放",
+            desc: "全新地形模组，精简版轻蓝整合包，建筑者集结！"
+        }
+    ];
+    
+    // ======================== 渲染函数 ========================
+    
+    // 渲染柱状图排行榜
+    function renderRanking() {
+        const container = document.getElementById('rankContainer');
+        if (!container) return;
+        
+        // 找出最大值用于计算百分比宽度
+        const maxValue = Math.max(...rankData.map(item => item.value), 1);
+        
+        let html = '';
+        rankData.forEach((item, index) => {
+            const percent = (item.value / maxValue) * 100;
+            html += `
+                <div class="rank-item">
+                    <div class="rank-number">${index + 1}</div>
+                    <div class="rank-name">${escapeHtml(item.name)}</div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: ${percent}%;">
+                            ${percent > 15 ? Math.round(percent) + '%' : ''}
+                        </div>
+                    </div>
+                    <div class="rank-value">${item.value}</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+    
+    // 渲染新闻列表
+    function renderNews() {
+        const container = document.getElementById('newsContainer');
+        if (!container) return;
+        
+        let html = '';
+        newsData.forEach(news => {
+            html += `
+                <div class="news-item">
+                    <div class="news-date">${escapeHtml(news.date)}</div>
+                    <div class="news-title">${escapeHtml(news.title)}</div>
+                    <div class="news-desc">${escapeHtml(news.desc)}</div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+    
+    // 简单的防XSS函数
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    // 初始化页面
+    renderRanking();
+    renderNews();
+</script>
 </body>
 </html>
