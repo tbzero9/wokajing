@@ -32,7 +32,7 @@
         }
 
         .logo-wrapper {
-            width: 130px;
+            width: 300px;  /* 翻倍：原130px → 260px */
             margin: 0 auto 1rem;
             filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
             transition: transform 0.2s;
@@ -169,7 +169,7 @@
             margin: 2rem 0;
         }
 
-        /* 新闻列表样式（未改动） */
+        /* 新闻列表样式 */
         .news-list {
             display: flex;
             flex-direction: column;
@@ -250,7 +250,7 @@
                 font-size: 1.8rem;
             }
             .logo-wrapper {
-                width: 90px;
+                width: 180px; /* 移动端适当缩小，但仍比原130px大 */
             }
             body {
                 padding: 1rem;
@@ -287,7 +287,7 @@
     <!-- 头部 LOGO + 服务器信息 -->
     <div class="hero">
         <div class="logo-wrapper">
-            <!-- 更新后的 LOGO（移除位图参考） -->
+            <!-- 更新版 LOGO (已移除位图，纯矢量) -->
             <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
                 <path fill="#ff6834" d="m 95,132.5 -10,20.66802 -3e-6,36.83198 C 84.999996,215 115,215 115,215 v -20 h -10 v -45 h 90 v 45 h -10 v 20 c 0,0 30,0 30,-25 v -37.5 l -10,-20 -40,0 -1.25,2.5 h -30 l -1.25,-2.5 z" />
                 <path fill="#ffd20c" d="m 138.75019,79.999768 -1.25006,2.500106 v 40.000146 l 1.25006,2.5001 L 156.29034,125 162.5,112.5 V 110 l -3.6636,-7.5 v 0 l 3.66376,-7.500114 V 92.49978 l -6.25027,-12.500012 h -6.24974 z m 6.24974,7.500317 h 7.50032 l 2.49959,4.999695 v 2.500106 l -2.49959,5.000214 h -7.50032 z M 145,105 h 7.50032 l 2.49959,5.00021 v 2.50011 l -2.49959,4.99969 H 145 Z" />
@@ -305,7 +305,7 @@
         </div>
     </div>
 
-    <!-- 排行榜（竖向柱状图）单独一行 -->
+    <!-- 排行榜（竖向柱状图）单独一行，共7人 -->
     <div class="card" style="margin-bottom: 2rem;">
         <div class="card-title">
             📊 本周贡献值排行
@@ -334,7 +334,7 @@
             </div>
         </div>
 
-        <!-- 右侧：简讯页（原新闻公告） -->
+        <!-- 右侧：简讯（原新闻公告） -->
         <div class="card">
             <div class="card-title">
                 📢 简讯
@@ -369,8 +369,8 @@
         { name: "-", value: 0 },
         { name: "-", value: 0 },
         { name: "-", value: 0 },
-        { name: "-", value: 0 },   // 新增第6名占位
-        { name: "-", value: 0 }    // 新增第7名占位
+        { name: "-", value: 0 },
+        { name: "-", value: 0 }
     ];
     
     // 新闻数据 (按时间倒序，最新在上)
