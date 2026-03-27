@@ -250,49 +250,6 @@
     </style>
 </head>
 <body>
-<!-- MTR 线路图嵌入模块（带标题和爱发电链接） -->
-<div id="mtr-map-container" style="margin-top: 2rem; background: rgba(0,0,0,0.3); border-radius: 1.5rem; padding: 1rem;">
-    <!-- 标题栏 -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
-        <div style="font-size: 1.3rem; font-weight: 700; color: #ffd20c; display: flex; align-items: center; gap: 0.5rem;">
-            🚇 MTR 线路图
-        </div>
-        <a href="https://ifdian.net/a/wokajing_yyn" target="_blank" style="background: #f43e5c; color: white; padding: 0.4rem 1rem; border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; display: inline-flex; align-items: center; gap: 6px;">
-            ❤️ 支持我们（爱发电）
-        </a>
-    </div>
-
-    <div id="mtr-loading" style="padding: 2rem; text-align: center; color: #ffd20c;">🚇 正在加载线路图...</div>
-    <iframe id="mtr-iframe" style="width: 100%; height: 500px; border: none; border-radius: 1rem; display: none;"></iframe>
-    <div id="mtr-fallback" style="padding: 2rem; text-align: center; color: #ffa500; display: none;">⚠️ 线路图显示失败！请打开客户端以查看线路图</div>
-</div>
-
-<script>
-    (function() {
-        const iframe = document.getElementById('mtr-iframe');
-        const loading = document.getElementById('mtr-loading');
-        const fallback = document.getElementById('mtr-fallback');
-        const url = 'http://localhost:1025/';
-
-        fetch(url, { mode: 'no-cors', cache: 'no-store' })
-            .then(() => {
-                loading.style.display = 'none';
-                iframe.style.display = 'block';
-                iframe.src = url;
-            })
-            .catch(() => {
-                loading.style.display = 'none';
-                fallback.style.display = 'block';
-            });
-
-        setTimeout(() => {
-            if (loading.style.display !== 'none' && iframe.style.display !== 'block' && fallback.style.display !== 'block') {
-                loading.style.display = 'none';
-                fallback.style.display = 'block';
-            }
-        }, 5000);
-    })();
-</script>
 <div class="container">
     <!-- 头部 LOGO + 服务器信息 -->
     <div class="hero">
@@ -341,12 +298,15 @@
         </div>
     </div>
 
-    <!-- B站超链接按钮 -->
-    <div class="banner">
-        <a href="https://space.bilibili.com/3546939914193630?spm_id_from=333.788.0.0" target="_blank" class="bilibili-btn">
-            🎬 访问我们的B站主页
-        </a>
-    </div>
+    <div class="banner" style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem;">
+    <a href="https://space.bilibili.com/3546939914193630?spm_id_from=333.788.0.0" target="_blank" class="bilibili-btn" style="display: inline-flex; align-items: center; gap: 10px; background: #00a1d6; padding: 0.8rem 2rem; border-radius: 60px; font-weight: bold; font-size: 1.1rem; text-decoration: none; color: white; transition: transform 0.2s;">
+        🎬 B站主页
+    </a>
+    <a href="https://ifdian.net/a/wokajing_yyn" target="_blank" class="afdian-btn" style="display: inline-flex; align-items: center; gap: 10px; background: #946ce6; padding: 0.8rem 2rem; border-radius: 60px; font-weight: bold; font-size: 1.1rem; text-decoration: none; color: white; transition: transform 0.2s;">
+        ❤️ 爱发电支持
+    </a>
+</div>
+    
 
     <div class="footer">
         © 2026 TBZ 服务器 | 打野的走位我就觉得你麻痹离谱
@@ -448,6 +408,45 @@
     // 初始化页面
     renderRanking();
     renderNews();
+</script>
+    <!-- MTR 线路图嵌入模块 -->
+<div id="mtr-map-container" style="margin-top: 2rem; text-align: center; background: rgba(0,0,0,0.4); border-radius: 1.5rem; padding: 1rem;">
+    <h3 style="margin-bottom: 1rem; font-size: 1.3rem; color: #ffd20c; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        🗺️ 线路图
+    </h3>
+    <div id="mtr-loading" style="padding: 2rem; color: #ffd20c;">🚇 正在加载线路图...</div>
+    <div style="position: relative; width: 100%; padding-bottom: 75%; /* 4:3 比例 */ background: #0a0c12; border-radius: 1rem; overflow: hidden; display: none;" id="iframe-wrapper">
+        <iframe id="mtr-iframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #0a0c12;"></iframe>
+    </div>
+    <div id="mtr-fallback" style="padding: 2rem; color: #ffa500; display: none;">⚠️ 线路图显示失败！请打开客户端以查看线路图</div>
+</div>
+
+<script>
+    (function() {
+        const iframe = document.getElementById('mtr-iframe');
+        const loading = document.getElementById('mtr-loading');
+        const fallback = document.getElementById('mtr-fallback');
+        const wrapper = document.getElementById('iframe-wrapper');
+        const url = 'http://localhost:1025/';
+
+        fetch(url, { mode: 'no-cors', cache: 'no-store' })
+            .then(() => {
+                loading.style.display = 'none';
+                wrapper.style.display = 'block';
+                iframe.src = url;
+            })
+            .catch(() => {
+                loading.style.display = 'none';
+                fallback.style.display = 'block';
+            });
+
+        setTimeout(() => {
+            if (loading.style.display !== 'none' && wrapper.style.display !== 'block' && fallback.style.display !== 'block') {
+                loading.style.display = 'none';
+                fallback.style.display = 'block';
+            }
+        }, 5000);
+    })();
 </script>
 </body>
 </html>
