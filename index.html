@@ -72,14 +72,6 @@
             font-weight: bold;
         }
 
-        /* 两列布局 */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
         /* 卡片通用样式 */
         .card {
             background: rgba(18, 22, 32, 0.75);
@@ -105,16 +97,48 @@
             gap: 0.5rem;
         }
 
-        /* 排行榜柱状图样式 */
+        /* ========= 竖向柱状图排行榜 ========= */
         .rank-list {
             display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
+            justify-content: space-around;
+            align-items: flex-end;
+            gap: 1.5rem;
+            padding: 1rem 0 0.5rem;
+            flex-wrap: wrap;
         }
         .rank-item {
+            flex: 1;
+            text-align: center;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.6rem;
+            min-width: 70px;
+        }
+        .bar-container {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            height: 180px; /* 固定高度，方便柱状图比例 */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            position: relative;
+        }
+        .bar-fill {
+            background: linear-gradient(0deg, #ff6834, #ffd20c);
+            width: 100%;
+            height: 0%;
+            transition: height 0.5s ease;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            color: #0a0c10;
+            font-weight: bold;
+            font-size: 0.8rem;
+            padding-top: 4px;
         }
         .rank-number {
             width: 32px;
@@ -126,45 +150,26 @@
             justify-content: center;
             font-weight: bold;
             color: #0a0c10;
-            flex-shrink: 0;
         }
         .rank-name {
-            width: 100px;
             font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .bar-container {
-            flex: 1;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            height: 28px;
-            overflow: hidden;
-            position: relative;
-        }
-        .bar-fill {
-            background: linear-gradient(90deg, #ffd20c, #ff6834);
-            width: 0%;
-            height: 100%;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 8px;
-            color: #0a0c10;
-            font-weight: bold;
-            font-size: 0.8rem;
-            transition: width 0.5s ease;
+            font-size: 0.9rem;
         }
         .rank-value {
-            min-width: 60px;
-            text-align: right;
             font-weight: 700;
             color: #ffd20c;
+            font-size: 0.9rem;
         }
 
-        /* 新闻列表 */
+        /* 两列布局（线路图 + 新闻） */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* 新闻列表样式（未改动） */
         .news-list {
             display: flex;
             flex-direction: column;
@@ -190,17 +195,18 @@
             line-height: 1.4;
         }
 
-        /* B站按钮区域 */
+        /* 按钮区域（B站 + 爱发电）*/
         .banner {
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
             margin-top: 2rem;
-            margin-bottom: 2rem;
         }
-        .bilibili-btn {
+        .bilibili-btn, .afdian-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: #00a1d6;
             padding: 0.8rem 2rem;
             border-radius: 60px;
             font-weight: bold;
@@ -210,8 +216,18 @@
             transition: transform 0.2s, background 0.2s;
             box-shadow: 0 5px 12px rgba(0,0,0,0.3);
         }
+        .bilibili-btn {
+            background: #00a1d6;
+        }
         .bilibili-btn:hover {
             background: #0082b3;
+            transform: translateY(-2px);
+        }
+        .afdian-btn {
+            background: #946ce6;
+        }
+        .afdian-btn:hover {
+            background: #7b52c7;
             transform: translateY(-2px);
         }
 
@@ -226,8 +242,9 @@
         }
 
         @media (max-width: 800px) {
-            .dashboard {
+            .two-columns {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             .server-name {
                 font-size: 1.8rem;
@@ -238,8 +255,24 @@
             body {
                 padding: 1rem;
             }
-            .rank-name {
-                width: 70px;
+            .rank-list {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .rank-item {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 1rem;
+            }
+            .bar-container {
+                height: 40px;
+                width: 60%;
+            }
+            .bar-fill {
+                border-radius: 12px;
+                height: 100% !important;
+                width: 0%;
+                background: linear-gradient(90deg, #ff6834, #ffd20c);
             }
         }
 
@@ -254,7 +287,6 @@
     <!-- 头部 LOGO + 服务器信息 -->
     <div class="hero">
         <div class="logo-wrapper">
-            <!-- 用户提供的 TBZ LOGO SVG (更新版) -->
             <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
                 <path fill="#ff6834" d="m 95,132.5 -10,20.66802 -3e-6,36.83198 C 84.999996,215 115,215 115,215 v -20 h -10 v -45 h 90 v 45 h -10 v 20 c 0,0 30,0 30,-25 v -37.5 l -10,-20 -40,0 -1.25,2.5 h -30 l -1.25,-2.5 z" />
                 <path fill="#ffd20c" d="M 138.75019 79.999768 L 137.50013 82.499874 L 137.50013 122.50002 L 138.75019 125.00012 L 157.49995 125.00012 L 162.50016 115.00022 L 162.50016 112.50011 L 158.75 104.99979 L 158.75 102.5002 L 162.50016 94.999886 L 162.50016 92.49978 L 156.24989 79.999768 L 150.00015 79.999768 L 138.75019 79.999768 z M 144.99993 87.500085 L 152.50025 87.500085 L 154.99984 92.49978 L 154.99984 94.999886 L 152.50025 100.0001 L 144.99993 100.0001 L 144.99993 87.500085 z M 144.99993 107.4999 L 152.50025 107.4999 L 154.99984 112.50011 L 154.99984 115.00022 L 152.50025 119.99991 L 144.99993 119.99991 L 144.99993 107.4999 z " />
@@ -272,22 +304,36 @@
         </div>
     </div>
 
-    <!-- 主体内容：左右布局 -->
-    <div class="dashboard">
-        <!-- 左侧：柱状图贡献值排行榜 -->
-        <div class="card">
-            <div class="card-title">
-                📊 本周贡献值排行
-            </div>
-            <div id="rankContainer" class="rank-list">
-                <!-- 动态生成排行榜柱状图 -->
-            </div>
-            <div style="margin-top: 1rem; font-size:0.75rem; text-align:center; opacity:0.6;">
-                ✨ 数据每日手动更新 | 感谢支持
+    <!-- 排行榜（竖向柱状图）单独一行 -->
+    <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-title">
+            📊 本周贡献值排行
+        </div>
+        <div id="rankContainer" class="rank-list">
+            <!-- 动态生成竖向柱状图 -->
+        </div>
+        <div style="margin-top: 1.5rem; font-size:0.75rem; text-align:center; opacity:0.6;">
+            ✨ 数据每日手动更新 | 感谢支持
+        </div>
+    </div>
+
+    <!-- 两列布局：线路图 + 新闻公告 -->
+    <div class="two-columns">
+        <!-- 左侧：线路图模块（3:4 竖长方形）-->
+        <div class="card" style="padding: 1rem;">
+            <h3 style="margin-bottom: 1rem; font-size: 1.3rem; color: #ffd20c; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                🗺️ 线路图
+            </h3>
+            <div id="mtr-map-inner">
+                <div id="mtr-loading" style="padding: 2rem; text-align: center; color: #ffd20c;">🚇 正在加载线路图...</div>
+                <div id="iframe-wrapper" style="position: relative; width: 100%; padding-bottom: 133.33%; /* 3:4 比例 (高:宽 = 4:3 => 宽:高 = 3:4) 所以高度为宽度的133.33% */ background: #0a0c12; border-radius: 1rem; overflow: hidden; display: none;">
+                    <iframe id="mtr-iframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #0a0c12;"></iframe>
+                </div>
+                <div id="mtr-fallback" style="padding: 2rem; text-align: center; color: #ffa500; display: none;">⚠️ 线路图显示失败！请打开客户端以查看线路图</div>
             </div>
         </div>
 
-        <!-- 右侧：新闻发布页 -->
+        <!-- 右侧：新闻公告页 -->
         <div class="card">
             <div class="card-title">
                 📢 最新公告
@@ -298,15 +344,15 @@
         </div>
     </div>
 
-    <div class="banner" style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem;">
-    <a href="https://space.bilibili.com/3546939914193630?spm_id_from=333.788.0.0" target="_blank" class="bilibili-btn" style="display: inline-flex; align-items: center; gap: 10px; background: #00a1d6; padding: 0.8rem 2rem; border-radius: 60px; font-weight: bold; font-size: 1.1rem; text-decoration: none; color: white; transition: transform 0.2s;">
-        🎬 B站主页
-    </a>
-    <a href="https://ifdian.net/a/wokajing_yyn" target="_blank" class="afdian-btn" style="display: inline-flex; align-items: center; gap: 10px; background: #946ce6; padding: 0.8rem 2rem; border-radius: 60px; font-weight: bold; font-size: 1.1rem; text-decoration: none; color: white; transition: transform 0.2s;">
-        ❤️ 爱发电支持
-    </a>
-</div>
-    
+    <!-- B站 + 爱发电按钮 -->
+    <div class="banner">
+        <a href="https://space.bilibili.com/3546939914193630?spm_id_from=333.788.0.0" target="_blank" class="bilibili-btn">
+            🎬 B站主页
+        </a>
+        <a href="https://ifdian.net/a/wokajing_yyn" target="_blank" class="afdian-btn">
+            ❤️ 爱发电支持
+        </a>
+    </div>
 
     <div class="footer">
         © 2026 TBZ 服务器 | 打野的走位我就觉得你麻痹离谱
@@ -315,8 +361,6 @@
 
 <script>
     // ======================== 数据配置区域 ========================
-    // 修改这里的数据即可更新排行榜和新闻内容
-    
     // 排行榜数据 (前五名) - 格式: { name: "玩家名", value: 贡献值 }
     const rankData = [
         { name: "cnmself", value: 15 },
@@ -347,12 +391,12 @@
     
     // ======================== 渲染函数 ========================
     
-    // 渲染柱状图排行榜
+    // 渲染竖向柱状图排行榜
     function renderRanking() {
         const container = document.getElementById('rankContainer');
         if (!container) return;
         
-        // 找出最大值用于计算百分比宽度
+        // 找出最大值（至少1，避免除零）
         const maxValue = Math.max(...rankData.map(item => item.value), 1);
         
         let html = '';
@@ -361,12 +405,12 @@
             html += `
                 <div class="rank-item">
                     <div class="rank-number">${index + 1}</div>
-                    <div class="rank-name">${escapeHtml(item.name)}</div>
                     <div class="bar-container">
-                        <div class="bar-fill" style="width: ${percent}%;">
-                            ${percent > 15 ? Math.round(percent) + '%' : ''}
+                        <div class="bar-fill" style="height: ${percent}%;">
+                            ${percent > 10 ? Math.round(percent) + '%' : ''}
                         </div>
                     </div>
+                    <div class="rank-name">${escapeHtml(item.name)}</div>
                     <div class="rank-value">${item.value}</div>
                 </div>
             `;
@@ -408,20 +452,8 @@
     // 初始化页面
     renderRanking();
     renderNews();
-</script>
-    <!-- MTR 线路图嵌入模块 -->
-<div id="mtr-map-container" style="margin-top: 2rem; text-align: center; background: rgba(0,0,0,0.4); border-radius: 1.5rem; padding: 1rem;">
-    <h3 style="margin-bottom: 1rem; font-size: 1.3rem; color: #ffd20c; display: flex; align-items: center; justify-content: center; gap: 8px;">
-        🗺️ 线路图
-    </h3>
-    <div id="mtr-loading" style="padding: 2rem; color: #ffd20c;">🚇 正在加载线路图...</div>
-    <div style="position: relative; width: 100%; padding-bottom: 75%; /* 4:3 比例 */ background: #0a0c12; border-radius: 1rem; overflow: hidden; display: none;" id="iframe-wrapper">
-        <iframe id="mtr-iframe" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: #0a0c12;"></iframe>
-    </div>
-    <div id="mtr-fallback" style="padding: 2rem; color: #ffa500; display: none;">⚠️ 线路图显示失败！请打开客户端以查看线路图</div>
-</div>
 
-<script>
+    // 线路图加载逻辑
     (function() {
         const iframe = document.getElementById('mtr-iframe');
         const loading = document.getElementById('mtr-loading');
