@@ -376,10 +376,10 @@
     // ======================== 数据配置区域 ========================
     // 排行榜数据 (前七名) - 格式: { name: "玩家名", value: 贡献值 }
     const rankData = [
-        { name: "cnmself", value: 15 },
-        { name: "MCfanfan11", value: 15 },
-        { name: "-", value: 0 },
-        { name: "-", value: 0 },
+        { name: "cnmself", value: 30 },
+        { name: "MCfanfan11", value: 30 },
+        { name: "Bilibili_MSCM", value: 30 },
+        { name: "CIR", value: 15 },
         { name: "-", value: 0 },
         { name: "-", value: 0 },
         { name: "-", value: 0 }
@@ -387,6 +387,11 @@
     
     // 新闻数据 (按时间倒序，最新在上)
     const newsData = [
+        {
+            date: "2026.03.30",
+            title: "🔧服务器第一次低创建筑整改 ",
+            desc: "针对重生区附近区域（具体为-600，600到600，600）整改低质量和不合理建筑及站点，整改期间对于展示窗口地区的未经报备建筑无条件拆除，感谢配合"
+        },
         {
             date: "2026.03.27",
             title: "⚡官网已成立",
@@ -474,7 +479,7 @@
         const loading = document.getElementById('mtr-loading');
         const fallback = document.getElementById('mtr-fallback');
         const wrapper = document.getElementById('iframe-wrapper');
-        const url = 'http://localhost:1025/';
+        const url = 'http://localhost:/';
 
         fetch(url, { mode: 'no-cors', cache: 'no-store' })
             .then(() => {
